@@ -13,4 +13,8 @@ class Point {
         draw.arc(this.x, this.y, rad, 0, Math.PI * 2);
         draw.fill();
     }
+
+    equals(point) {
+        return this.x == point.x && this.y == point.y;
+    }
 }

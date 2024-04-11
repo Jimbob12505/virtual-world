@@ -8,11 +8,27 @@
         <h1> World Editor </h1>
         <canvas id="canvas"> </canvas>
 
+        <div id="button-control">
+            <button onclick="addPoint()"> Add Point </button>
+        </div>
+
         <script src="util/math/graph.js"></script>
         <script src="util/primitive/point.js"></script>
         <script src="util/primitive/segment.js"></script>
         
         <script>
+            function addPoint() {
+                const success = graph.tryAddPoint(
+                    new Point(
+                        Math.random() * canvas.width, 
+                        Math.random() * canvas.height
+                    )
+                );
+                draw.clearRect(0,0, canvas.width, canvas.height);
+                graph.draw(draw);
+                console.log(success);
+            }
+
             canvas.width = 600;
             canvas.height = 600; 
 
