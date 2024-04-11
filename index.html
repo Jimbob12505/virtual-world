@@ -11,6 +11,9 @@
         <div id="button-control">
             <button onclick="addPoint()"> Add Point </button>
             <button onclick="addSegment()"> Add Segment </button>
+            <button onclick="removeSegment()"> Remove Segment </button>
+            <button onclick="removePoint()"> Remove Point </button>
+            <button onclick="dispose()"> Clear </button>
         </div>
 
         <script src="util/math/graph.js"></script>
@@ -18,12 +21,42 @@
         <script src="util/primitive/segment.js"></script>
         
         <script>
+            function dispose() {
+                graph.clear();
+                 
+                draw.clearRect(0,0, canvas.width, canvas.height);
+                graph.draw(draw);
+            }
+
+            function removePoint() {
+                if(graph.points.length == 0) {
+                    console.log("No Points");
+                    return;
+                }
+                const index = Math.floor(Math.random() * graph.points.length);
+                graph.removePoint(graph.points[index]);
+
+                draw.clearRect(0,0, canvas.width, canvas.height);
+                graph.draw(draw);
+            }
+
+            function removeSegment() {
+                if(graph.segments.length == 0) {
+                    console.log("No Segments");
+                    return;
+                }
+                const index = Math.floor(Math.random() * graph.segments.length);
+                graph.removeSegment(graph.segments[index]);
+
+                draw.clearRect(0,0, canvas.width, canvas.height);
+                graph.draw(draw);
+            }
 
             function addSegment() {
                 const floor1 = Math.floor(Math.random() * graph.points.length);
                 const floor2 = Math.floor(Math.random() * graph.points.length);
 
-                const success = success = graph.tryAddSegment(
+                const success = graph.tryAddSegment(
                     new Segment(graph.points[floor1], graph.points[floor2])
                 );;
 
