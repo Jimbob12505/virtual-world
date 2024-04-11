@@ -10,6 +10,7 @@
 
         <div id="button-control">
             <button onclick="addPoint()"> Add Point </button>
+            <button onclick="addSegment()"> Add Segment </button>
         </div>
 
         <script src="util/math/graph.js"></script>
@@ -17,6 +18,21 @@
         <script src="util/primitive/segment.js"></script>
         
         <script>
+
+            function addSegment() {
+                const floor1 = Math.floor(Math.random() * graph.points.length);
+                const floor2 = Math.floor(Math.random() * graph.points.length);
+
+                const success = success = graph.tryAddSegment(
+                    new Segment(graph.points[floor1], graph.points[floor2])
+                );;
+
+                draw.clearRect(0,0, canvas.width, canvas.height);
+                graph.draw(draw);
+                console.log(success);
+            }
+
+            // Create a random width and height coordinate no greater than the canvas width and height, then add it to the points array and draw.
             function addPoint() {
                 const success = graph.tryAddPoint(
                     new Point(
